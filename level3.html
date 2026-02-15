@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 3 - Web Dev Mini-Quest</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                
+                <section class="card shadow">
+                    <div class="card-body p-4">
+                        <span id="badge" class="badge rounded-pill text-bg-primary">
+                            <i class="bi bi-bar-chart-steps me-1"></i> Level 1
+                        </span>
+
+                        <h1 class="h4 fw-bold mt-2">JavaScript: Level Up</h1>
+
+                        <p id="msg" class="text-muted">
+                            Click the button to increase the level number.
+                        </p>
+
+                        <button id="levelUpBtn" class="btn btn-success w-100 mb-3">
+                            <i class="bi bi-arrow-up-circle-fill me-1"></i> Level Up
+                        </button>
+
+                        <div class="d-flex gap-2">
+                            <a href="level2.html" class="btn btn-secondary flex-grow-1">
+                                <i class="bi bi-arrow-left"></i> Back
+                            </a>
+                            <a href="level4.html" class="btn btn-dark flex-grow-1">
+                                Next Level <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentLevel = 1;
+        const maxLevel = 6;
+
+        const badge = document.getElementById("badge");
+        const msg = document.getElementById("msg");
+        const levelUpBtn = document.getElementById("levelUpBtn");
+
+        levelUpBtn.addEventListener("click", () => {
+            if (currentLevel < maxLevel) {
+                currentLevel++;
+                
+                badge.innerHTML = `<i class="bi bi-bar-chart-steps me-1"></i> Level ${currentLevel}`;
+                msg.innerHTML = `<i class="bi bi-check-circle-fill text-success me-1"></i> You leveled up! Current Level: <strong>${currentLevel}</strong>`;
+                
+                if (currentLevel === maxLevel) {
+                    levelUpBtn.disabled = true;
+                    levelUpBtn.innerText = "Max Level Reached!";
+                }
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

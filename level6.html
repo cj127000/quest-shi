@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 6 - Web Dev Mini-Quest</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                
+                <section class="card shadow border-0">
+                    <div class="card-body p-4">
+                        <span class="badge rounded-pill text-bg-primary">Level 6</span>
+                        <h1 class="h4 fw-bold mt-2">Conditionals: Pick the Correct Door</h1>
+                        <p class="text-muted mb-4">
+                            Click a door. Only one is correct.
+                        </p>
+
+                        <div class="d-flex gap-2 mb-4">
+                            <button class="btn btn-success flex-fill doorBtn" data-door="1">
+                                <i class="bi bi-door-closed"></i> Door 1
+                            </button>
+                            <button class="btn btn-warning flex-fill doorBtn" data-door="2">
+                                <i class="bi bi-door-closed"></i> Door 2
+                            </button>
+                            <button class="btn btn-danger flex-fill doorBtn" data-door="3">
+                                <i class="bi bi-door-closed"></i> Door 3
+                            </button>
+                        </div>
+
+                        <div id="feedback-container"></div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex gap-2">
+                            <a href="level5.html" class="btn btn-secondary flex-grow-1">
+                                <i class="bi bi-arrow-left"></i> Back
+                            </a>
+                            <button id="actionBtn" onclick="location.reload()" class="btn btn-dark flex-grow-1">
+                                <i class="bi bi-arrow-clockwise"></i> Restart
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const winningDoor = 2;
+        const doorButtons = document.querySelectorAll(".doorBtn");
+        const feedbackContainer = document.getElementById("feedback-container");
+        const actionBtn = document.getElementById("actionBtn");
+
+        doorButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const picked = Number(btn.dataset.door);
+
+                doorButtons.forEach(b => {
+                    b.disabled = true;
+                    b.classList.add("opacity-50");
+                });
+
+                feedbackContainer.innerHTML = "";
+
+                if (picked === winningDoor) {
+                    feedbackContainer.innerHTML = `
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <i class="bi bi-check-circle-fill me-2 fs-4"></i>
+                            <div>
+                                <strong>Success!</strong> You found the winning door!
+                            </div>
+                        </div>`;
+                    
+                    actionBtn.innerText = "Return to Level 1";
+                    actionBtn.classList.replace("btn-dark", "btn-primary");
+                    actionBtn.onclick = () => { window.location.href = "level1.html"; };
+                } else {
+                    feedbackContainer.innerHTML = `
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <i class="bi bi-exclamation-octagon-fill me-2 fs-4"></i>
+                            <div>
+                                <strong>Error!</strong> That was the wrong door.
+                            </div>
+                        </div>`;
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
